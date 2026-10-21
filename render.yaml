@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: stockverse
+    runtime: static
+    staticPublishPath: ./static

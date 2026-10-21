@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05060f">
+  <title>Stock Verse · Phân tích cổ phiếu</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <canvas id="gl" aria-hidden="true"></canvas>
+
+  <nav class="nav" aria-label="Điều hướng chính">
+    <a class="brand" href="#">STOCK VERSE</a>
+    <div class="nav-links">
+      <a href="#overview">Tổng quan</a>
+      <a href="#monthly">Theo tháng</a>
+      <a href="#quarterly">Theo quý</a>
+      <a href="#trends">Xu hướng</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="tag">Project cổ phiếu · 1 năm</div>
+      <h1>STOCK<br>VERSE</h1>
+      <p id="subtitle">
+        Khám phá dữ liệu giá cổ phiếu theo tháng, quý và xu hướng cả năm trong không gian 3D.
+      </p>
+
+      <div class="hero-actions">
+        <a class="button" href="#overview">
+          Bắt đầu <span aria-hidden="true">↓</span>
+        </a>
+
+        <input
+          class="visually-hidden"
+          type="file"
+          id="csv-file"
+          accept=".csv,text/csv"
+        >
+        <label class="button button-secondary" for="csv-file">Tải file CSV</label>
+      </div>
+
+      <p class="file-status" id="file-status" role="status" aria-live="polite">
+        Đang hiển thị dữ liệu mẫu.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section id="overview">
+      <div class="tag">01 · Tổng quan</div>
+      <h2>Dữ liệu cổ phiếu 1 năm</h2>
+
+      <div class="card reveal">
+        <canvas
+          class="chart chart-large"
+          id="chart-overview"
+          role="img"
+          aria-label="Biểu đồ giá đóng cửa theo phiên"
+        ></canvas>
+      </div>
+
+      <div class="kpi-grid" id="kpi" aria-live="polite"></div>
+    </section>
+
+    <section id="monthly">
+      <div class="tag">02 · Theo tháng</div>
+      <h2>Phân tích theo tháng</h2>
+
+      <div class="grid">
+        <article class="card reveal">
+          <h3>Boxplot giá đóng cửa mỗi tháng</h3>
+          <canvas
+            class="chart"
+            id="chart-boxplot"
+            role="img"
+            aria-label="Phân bố giá đóng cửa từng tháng"
+          ></canvas>
+        </article>
+
+        <article class="card reveal">
+          <h3>Giá trung bình mỗi tháng</h3>
+          <canvas
+            class="chart"
+            id="chart-monthly-average"
+            role="img"
+            aria-label="Giá đóng cửa trung bình theo tháng"
+          ></canvas>
+        </article>
+      </div>
+
+      <div class="card note reveal" id="monthly-note"></div>
+    </section>
+
+    <section id="quarterly">
+      <div class="tag">03 · Theo quý</div>
+      <h2>Phân bố giá theo quý</h2>
+
+      <div class="grid">
+        <article class="card reveal">
+          <h3>Quý 1 &amp; Quý 2</h3>
+          <canvas
+            class="chart"
+            id="chart-quarter-first"
+            role="img"
+            aria-label="Phân bố giá quý một và quý hai"
+          ></canvas>
+        </article>
+
+        <article class="card reveal">
+          <h3>Quý 3 &amp; Quý 4</h3>
+          <canvas
+            class="chart"
+            id="chart-quarter-last"
+            role="img"
+            aria-label="Phân bố giá quý ba và quý bốn"
+          ></canvas>
+        </article>
+      </div>
+
+      <div class="card note reveal" id="quarterly-note"></div>
+    </section>
+
+    <section id="trends">
+  <div class="tag">04 · Xu hướng</div>
+  <h2>Xu hướng giá cả năm</h2>
+
+  <div class="grid">
+    <article class="card reveal">
+      <h3>Đường xu hướng hồi quy tuyến tính</h3>
+      <canvas
+        class="chart"
+        id="chart-trend"
+        role="img"
+        aria-label="Xu hướng giá đóng cửa và đường hồi quy tuyến tính"
+      ></canvas>
+    </article>
+  </div>
+
+  <article class="card reveal video-card">
+    <h3>Video mô phỏng giá</h3>
+    <video
+      id="stock-video"
+      controls
+      playsinline
+      preload="metadata"
+      poster="./assets/video/Xu hướng cả năm.png"
+    >
+      <source src="./assets/video/mo_phong_gia.mp4" type="video/mp4">
+      Trình duyệt của bạn không hỗ trợ phát video.
+    </video>
+    <p class="video-hint">
+      Mẫu cổ phiếu trong video có xu hướng giảm trong phần lớn năm, mặc dù đầu năm giá có nhiều nhịp tăng và đạt đỉnh vào khoảng giữa năm. Sau đó, cổ phiếu trải qua một đợt giảm mạnh và duy trì dao động ở vùng giá thấp trong những tháng cuối năm. Đến cuối kỳ, giá có dấu hiệu phục hồi nhưng chưa đủ cơ sở để khẳng định xu hướng tăng đã hình thành. Nhìn chung, mẫu cổ phiếu có mức độ biến động tương đối lớn và xu hướng chủ đạo là giảm giá. Nhà đầu tư cần thận trọng, theo dõi diễn biến giá và các tín hiệu xác nhận trước khi đưa ra quyết định.
+    </p>
+  </article>
+
+  <div class="card note reveal" id="trend-note"></div>
+</section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
